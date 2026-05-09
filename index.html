@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Difference USLUGE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #050505;
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --muted: #9ca3af;
+      --accent: #7c3aed;
+      --accent2: #3b82f6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
+      top: -250px;
+      right: -150px;
+      z-index: -1;
+      filter: blur(40px);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 70%);
+      bottom: -250px;
+      left: -150px;
+      z-index: -1;
+      filter: blur(40px);
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(16px);
+      background: rgba(5,5,5,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.35s;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      box-shadow: 0 0 30px rgba(124,58,237,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 28px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .mockup {
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 0 60px rgba(124,58,237,0.18);
+      transform: rotate(-4deg);
+    }
+
+    .mockup-screen {
+      background: #0b0b0b;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mockup-top {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .mockup-content {
+      padding: 40px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .panel {
+      height: 80px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(59,130,246,0.12));
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: 18px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      transition: 0.35s;
+      backdrop-filter: blur(12px);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(124,58,237,0.5);
+      box-shadow: 0 0 40px rgba(124,58,237,0.15);
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(59,130,246,0.25));
+      font-size: 1.4rem;
+    }
+
+    .card h3 {
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 30px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .step-number {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: auto auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .project-image {
+      height: 240px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(59,130,246,0.2));
+    }
+
+    .project-content {
+      padding: 28px;
+    }
+
+    .project-content p {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, rgba(124,58,237,0.18), rgba(59,130,246,0.12));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 36px;
+      padding: 70px;
+      text-align: center;
+      backdrop-filter: blur(18px);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      margin-bottom: 36px;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      padding: 80px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    footer h4 {
+      margin-bottom: 20px;
+    }
+
+    footer p,
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .copyright {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .cta {
+        padding: 50px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <span>Difference</span> USLUGE
+      </div>
+
+      <div class="nav-links">
+        <a href="#usluge">Usluge</a>
+        <a href="#proces">Proces</a>
+        <a href="#projekti">Projekti</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#kontakt" class="btn btn-primary">Započnimo projekt</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <div class="tag">Premium Digital Studio</div>
+
+      <h1>
+        Digitalna rješenja.
+        <span>Stvarne razlike.</span>
+      </h1>
+
+      <p>
+        Difference USLUGE izrađuje moderna digitalna iskustva kroz branding,
+        web stranice, web aplikacije i automatizaciju poslovanja.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#kontakt" class="btn btn-primary">Zatraži ponudu</a>
+        <a href="#projekti" class="btn btn-secondary">Pogledaj projekte</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="mockup">
+        <div class="mockup-screen">
+          <div class="mockup-top">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="mockup-content">
+            <div class="panel"></div>
+            <div class="panel"></div>
+            <div class="panel"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="usluge">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Usluge koje grade moderni brend</h2>
+      <p>
+        Pomažemo tvrtkama da se istaknu kroz vrhunski dizajn,
+        razvoj i automatizaciju poslovanja.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="card">
+        <div class="icon">◆</div>
+        <h3>Branding</h3>
+        <p>
+          Izrada identiteta, logotipa i modernih vizualnih sustava.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⌘</div>
+        <h3>Web Stranice</h3>
+        <p>
+          Moderne, brze i SEO optimizirane web stranice.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">◉</div>
+        <h3>Web Aplikacije</h3>
+        <p>
+          Custom dashboardi, SaaS platforme i poslovni sustavi.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Automatizacija</h3>
+        <p>
+          AI workflow rješenja i automatizacija poslovnih procesa.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="proces">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Kako radimo</h2>
+      <p>
+        Strukturirani proces za bržu realizaciju i bolje rezultate.
+      </p>
+    </div>
+
+    <div class="process">
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Strategija</h3>
+        <p>Analiza poslovanja i definiranje ciljeva.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Dizajn</h3>
+        <p>Premium UX/UI fokusiran na konverzije.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Development</h3>
+        <p>Brz i skalabilan razvoj modernih rješenja.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">04</div>
+        <h3>Rast</h3>
+        <p>Optimizacija, SEO i automatizacija procesa.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projekti">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Projekti koji ostavljaju dojam</h2>
+      <p>
+        Moderan dizajn i tehnologija usmjereni na rezultate.
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <div class="project">
+        <div class="project-image"></div>
+        <div class="project-content">
+          <h3>Luxury Dental Clinic</h3>
+          <p>Premium branding i moderna web stranica.</p>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-image"></div>
+        <div class="project-content">
+          <h3>AI Booking Platform</h3>
+          <p>Custom web aplikacija i automatizacija procesa.</p>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-image"></div>
+        <div class="project-content">
+          <h3>Real Estate Brand</h3>
+          <p>Vizualni identitet i digitalna prisutnost.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta">
+      <h2>Spremni za digitalnu transformaciju?</h2>
+
+      <p>
+        Izgradimo zajedno moderan digitalni identitet vašeg poslovanja.
+      </p>
+
+      <a href="#kontakt" class="btn btn-primary">
+        Kontaktiraj nas
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <h4>Difference USLUGE</h4>
+        <p>Difference, obrt za usluge</p>
+        <p>vl. Hrvoje Kovačić</p>
+      </div>
+
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+385958280800">+385 (95) 8280-800</a>
+        <a href="mailto:difference.usluge@gmail.com">
+          difference.usluge@gmail.com
+        </a>
+        <a href="https://difference-usluge.com.hr" target="_blank">
+          difference-usluge.com.hr
+        </a>
+      </div>
+
+      <div>
+        <h4>Adresa</h4>
+        <p>Martićeva 67</p>
+        <p>10000 Zagreb</p>
+        <p>Hrvatska</p>
+      </div>
+
+      <div>
+        <h4>Podaci</h4>
+        <p>OIB: 58245272280</p>
+        <p>M.B.: 99274647</p>
+        <p>IBAN: LT463250021552276757</p>
+        <p>Revolut Bank UAB</p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Difference USLUGE. Sva prava pridržana.
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
